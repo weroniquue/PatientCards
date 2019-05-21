@@ -1,0 +1,12 @@
+mgl-timeline-entry-side {
+  top: 20px;
+}
+
+mgl-timeline-entry-dot{
+  background-color: #55c7ed;
+ }
+
+mgl-timeline{
+  width: 75%;
+  margin: 0 auto;
+}

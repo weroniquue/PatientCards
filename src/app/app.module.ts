@@ -10,12 +10,14 @@ import { PatientsListComponent } from './shared/components/patients-list/patient
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 import {MatListModule} from '@angular/material/list';
-import {MatButtonModule, MatDividerModule, MatIconModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatDividerModule, MatIconModule} from '@angular/material';
 import { MglTimelineModule } from 'angular-mgl-timeline';
 
 import {HttpClientModule} from '@angular/common/http';
-import { PatientDetailsComponent } from './shared/components/patient-details/patient-details.component';
+
 import {FormsModule} from '@angular/forms';
+import { PatientTimelineComponent } from './shared/components/patient-timeline/patient-timeline.component';
+import {PatientDetailsComponent} from './shared/components/patient-details/patient-details.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import {FormsModule} from '@angular/forms';
     SearchInputComponent,
     PatientsListComponent,
     PageNotFoundComponent,
+    PatientTimelineComponent,
     PatientDetailsComponent
+
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,8 @@ import {FormsModule} from '@angular/forms';
     MatButtonModule,
     MatDividerModule,
     MglTimelineModule,
-    FormsModule
+    FormsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
