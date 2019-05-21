@@ -1,0 +1,8 @@
+.patient-list{
+  width: 75%;
+  margin: 0 auto;
+}
+
+.patient-list > mat-icon {
+  transform: scale(2.5);
+}

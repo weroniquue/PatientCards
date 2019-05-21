@@ -1,6 +1,15 @@
 
 <app-search-input></app-search-input>
 
-<p>
-  patients-list works!
-</p>
+<div>
+  <mat-action-list class="patient-list">
+    <mat-list-item *ngFor="let link of links" (click)="showDetails(link)">
+      <mat-icon mat-list-icon svgIcon="patient"></mat-icon>
+      <h4 mat-line>Imię i nazwisko</h4>
+      <p mat-line> Szczegóły</p>
+      <mat-divider></mat-divider>
+
+    </mat-list-item>
+  </mat-action-list>
+</div>
+
