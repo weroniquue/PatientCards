@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-patients-list',
@@ -11,7 +12,9 @@ export class PatientsListComponent implements OnInit {
 
   links = [1, 2, 3, 4];
 
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+  constructor(private matIconRegistry: MatIconRegistry,
+              private domSanitizer: DomSanitizer,
+              private router: Router) {
     this.matIconRegistry.addSvgIcon(
       `patient`,
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/images/medical-report.svg')
@@ -22,7 +25,10 @@ export class PatientsListComponent implements OnInit {
   }
 
   showDetails(id) {
-    console.log('Go to sss');
+    this.router.navigateByUrl('/Patients/' + id)
+      .catch(x => {
+        console.log(x);
+      });
   }
 
 }
