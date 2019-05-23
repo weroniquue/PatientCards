@@ -10,3 +10,8 @@ mgl-timeline{
   width: 75%;
   margin: 0 auto;
 }
+
+.date > h3,h4 {
+  text-align: center;
+  color: #ff5b62;
+}

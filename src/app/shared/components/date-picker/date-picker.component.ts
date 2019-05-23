@@ -29,7 +29,7 @@ export class DatePickerComponent implements OnInit {
       applyLabel: 'Submit',
       calendarOverlayConfig: {
         shouldCloseOnBackdropClick: true,
-        hasBackDrop: false
+        hasBackdrop: false
       }
       // cancelLabel: "Cancel",
       // excludeWeekends:true,
