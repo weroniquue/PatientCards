@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Chivo&display=swap');
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
+@import '~saturn-datepicker/bundle.css';
 
 body {
   margin: 0;

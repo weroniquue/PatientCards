@@ -10,7 +10,7 @@ import { PatientsListComponent } from './shared/components/patients-list/patient
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 import {MatListModule} from '@angular/material/list';
-import {MatButtonModule, MatCardModule, MatDividerModule, MatIconModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatDatepickerModule, MatDividerModule, MatIconModule, MatSelectModule} from '@angular/material';
 import { MglTimelineModule } from 'angular-mgl-timeline';
 
 import {HttpClientModule} from '@angular/common/http';
@@ -18,6 +18,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { PatientTimelineComponent } from './shared/components/patient-timeline/patient-timeline.component';
 import {PatientDetailsComponent} from './shared/components/patient-details/patient-details.component';
+import {NgxMatDrpModule} from 'ngx-mat-daterange-picker';
+import { DatePickerComponent } from './shared/components/date-picker/date-picker.component';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import {PatientDetailsComponent} from './shared/components/patient-details/patie
     PatientsListComponent,
     PageNotFoundComponent,
     PatientTimelineComponent,
-    PatientDetailsComponent
+    PatientDetailsComponent,
+    DatePickerComponent,
 
   ],
   imports: [
@@ -42,7 +45,9 @@ import {PatientDetailsComponent} from './shared/components/patient-details/patie
     MatDividerModule,
     MglTimelineModule,
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule,
+    NgxMatDrpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
