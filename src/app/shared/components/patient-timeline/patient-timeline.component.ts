@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PatientsService} from '../../services/patients.service';
 import {PatientDetails} from '../../models/patient/patient-details';
@@ -9,6 +9,8 @@ import {PatientDetails} from '../../models/patient/patient-details';
   styleUrls: ['./patient-timeline.component.css']
 })
 export class PatientTimelineComponent implements OnInit {
+
+  @Input() response: PatientDetails;
 
   private currentDate: Date;
 

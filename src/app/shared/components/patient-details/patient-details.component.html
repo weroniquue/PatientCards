@@ -3,12 +3,9 @@
     <mat-card-title>
       <h2>Jan Kowalski</h2>
     </mat-card-title>
-    <!--<mat-card-subtitle>Data urodzenia: </mat-card-subtitle>-->
   </mat-card-header>
 </mat-card>
 
 <app-patient-details-subpage *ngIf="response" [response]="response"></app-patient-details-subpage>
 
-<app-date-picker></app-date-picker>
-
-<app-patient-timeline></app-patient-timeline>
+<app-patient-timeline *ngIf="response" [response]="response"></app-patient-timeline>
