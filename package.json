@@ -29,6 +29,7 @@
     "ng-fhir": "^2.3.0",
     "ng-rn": "^1.0.0",
     "ngx-mat-daterange-picker": "^1.1.4",
+    "ngx-pagination": "^3.2.1",
     "rxjs": "~6.3.3",
     "saturn-datepicker": "^7.3.0",
     "zone.js": "~0.8.26"

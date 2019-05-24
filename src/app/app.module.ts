@@ -10,8 +10,9 @@ import { PatientsListComponent } from './shared/components/patients-list/patient
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 import {MatListModule} from '@angular/material/list';
-import {MatButtonModule, MatCardModule, MatDatepickerModule, MatDividerModule, MatIconModule, MatSelectModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatDividerModule, MatIconModule, MatSelectModule} from '@angular/material';
 import { MglTimelineModule } from 'angular-mgl-timeline';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import {HttpClientModule} from '@angular/common/http';
 
@@ -47,7 +48,8 @@ import { DatePickerComponent } from './shared/components/date-picker/date-picker
     FormsModule,
     MatCardModule,
     MatSelectModule,
-    NgxMatDrpModule
+    NgxMatDrpModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

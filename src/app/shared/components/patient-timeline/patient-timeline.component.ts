@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {PatientsService} from '../../services/patients.service';
 
 @Component({
   selector: 'app-patient-timeline',
@@ -8,12 +9,12 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class PatientTimelineComponent implements OnInit {
 
-  id: number;
-  private sub: any;
+  id: string;
   private currentDate: Date;
 
   constructor(private route: ActivatedRoute,
-              private router: Router) {}
+              private router: Router,
+              private patientsService: PatientsService) {}
 
   ngOnInit() {
 
@@ -21,15 +22,18 @@ export class PatientTimelineComponent implements OnInit {
       this.currentDate = new Date();
     }, 1000);
 
-    this.sub = this.route.params.subscribe(params => {
-      this.id = +params['id']; // (+) converts string 'id' to a number
+    this.getPatientDetails();
+  }
 
-      console.log(this.id);
+  getPatientDetails(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
 
-      if (Number.isNaN(this.id)) {
+    this.patientsService.getDetails(this.id)
+      .subscribe(response => {
+        console.log(response);
+      }, () => {
         this.router.navigateByUrl('/pageNotFound');
-      }
-    });
+      });
   }
 
 }
