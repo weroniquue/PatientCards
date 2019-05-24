@@ -3,6 +3,7 @@ import {Observable, of} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {catchError, tap} from 'rxjs/operators';
 import {Patient} from '../models/patient/patient.module';
+import {PatientDetails} from '../models/patient/patient-details';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -28,8 +29,8 @@ export class PatientsService {
   }
 
   //TODO
-  getDetails(id: string): any {
-    return this.http.get<any>(this.patientsUrl + '/' + id + '/$everything');
+  getDetails(id: string): Observable<PatientDetails> {
+    return this.http.get<PatientDetails>(this.patientsUrl + '/' + id + '/$everything');
   }
 
   searchPatients(term: string): Observable<any> {

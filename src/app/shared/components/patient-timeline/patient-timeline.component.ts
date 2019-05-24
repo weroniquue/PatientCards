@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PatientsService} from '../../services/patients.service';
+import {PatientDetails} from '../../models/patient/patient-details';
 
 @Component({
   selector: 'app-patient-timeline',
@@ -9,32 +10,18 @@ import {PatientsService} from '../../services/patients.service';
 })
 export class PatientTimelineComponent implements OnInit {
 
-  id: string;
   private currentDate: Date;
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private patientsService: PatientsService) {}
+  constructor() {}
 
   ngOnInit() {
 
     setInterval(() => {
       this.currentDate = new Date();
     }, 1000);
-
-    this.getPatientDetails();
   }
 
-  getPatientDetails(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
 
-    this.patientsService.getDetails(this.id)
-      .subscribe(response => {
-        console.log(response);
-      }, () => {
-        this.router.navigateByUrl('/pageNotFound');
-      });
-  }
 
 }
 

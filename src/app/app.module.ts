@@ -10,7 +10,15 @@ import { PatientsListComponent } from './shared/components/patients-list/patient
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 import {MatListModule} from '@angular/material/list';
-import {MatButtonModule, MatCardModule, MatDividerModule, MatIconModule, MatSelectModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatIconModule,
+  MatSelectModule,
+  MatTabsModule
+} from '@angular/material';
 import { MglTimelineModule } from 'angular-mgl-timeline';
 import {NgxPaginationModule} from 'ngx-pagination';
 
@@ -21,6 +29,7 @@ import { PatientTimelineComponent } from './shared/components/patient-timeline/p
 import {PatientDetailsComponent} from './shared/components/patient-details/patient-details.component';
 import {NgxMatDrpModule} from 'ngx-mat-daterange-picker';
 import { DatePickerComponent } from './shared/components/date-picker/date-picker.component';
+import { PatientDetailsSubpageComponent } from './shared/components/patient-details-subpage/patient-details-subpage.component';
 
 
 @NgModule({
@@ -33,6 +42,7 @@ import { DatePickerComponent } from './shared/components/date-picker/date-picker
     PatientTimelineComponent,
     PatientDetailsComponent,
     DatePickerComponent,
+    PatientDetailsSubpageComponent,
 
   ],
   imports: [
@@ -49,7 +59,9 @@ import { DatePickerComponent } from './shared/components/date-picker/date-picker
     MatCardModule,
     MatSelectModule,
     NgxMatDrpModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatExpansionModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
