@@ -3,7 +3,9 @@
     <h1>Find patient</h1>
     <h3>Click on search icon, then type patient's name.</h3>
     <div>
-      <input type="text" placeholder="       Search . . ." required>
+      <input (keyup)="findPatientByName($event)" (keyup.enter)="search()" type="text" placeholder="       Search . . ." required>
     </div>
   </div>
 </div>
+
+<app-patients-list [searchResponse]="searchResponse"></app-patients-list>

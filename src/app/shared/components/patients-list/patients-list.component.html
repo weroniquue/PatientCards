@@ -1,7 +1,5 @@
-
-<app-search-input></app-search-input>
-
-<div>
+<div *ngIf="patients">
+  <h2 *ngIf="patients.length == 0" class="error">Empty results</h2>
   <mat-action-list class="patient-list">
     <mat-list-item *ngFor="let patient of patients |
     paginate : {itemsPerPage: itemsPerPage, currentPage: currentPage}" (click)="showDetails(patient.resource.id)">

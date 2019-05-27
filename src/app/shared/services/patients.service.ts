@@ -28,21 +28,20 @@ export class PatientsService {
     return this.http.get<Patient>(url);
   }
 
-  //TODO
   getDetails(id: string): Observable<PatientDetails> {
     return this.http.get<PatientDetails>(this.patientsUrl + '/' + id + '/$everything');
   }
 
-  searchPatients(term: string): Observable<any> {
-    if (!term.trim()) {
+  // TODO
+  findPatientByName(name: string): Observable<any> {
+    if (!name.trim()) {
       return of([]);
     }
+    console.log(name + 'Service');
 
-    return null;
-
-    /*this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
-      tap(_ => this.log(`found heroes matching "${term}"`)),
-      catchError(this.handleError<Hero[]>('searchHeroes', []))
-    );*/
+    console.log('TODO FIND PATIENT- service');
+    return of([]);
+    //this.http.get<any>();
   }
+
 }

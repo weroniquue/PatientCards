@@ -6,3 +6,9 @@
 .patient-list > mat-icon {
   transform: scale(2.5);
 }
+
+.error {
+  color: red;
+  text-align: center;
+  font-style: normal;
+}

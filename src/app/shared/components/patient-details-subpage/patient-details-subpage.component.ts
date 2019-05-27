@@ -13,7 +13,7 @@ export class PatientDetailsSubpageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.response);
+
   }
 
 }

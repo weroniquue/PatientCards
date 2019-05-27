@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {PatientsService} from '../../services/patients.service';
 import {EntryEntity, Patient} from '../../models/patient/patient.module';
+import {PatientDetails} from '../../models/patient/patient-details';
 
 @Component({
   selector: 'app-patients-list',
   templateUrl: './patients-list.component.html',
   styleUrls: ['./patients-list.component.css']
 })
-export class PatientsListComponent implements OnInit {
+export class PatientsListComponent implements OnInit, OnChanges {
+
+  // TODO sprawdź typ
+  @Input() searchResponse: any;
 
   itemsPerPage = 10;
   currentPage = 1;
@@ -32,12 +36,17 @@ export class PatientsListComponent implements OnInit {
     this.getPatients();
   }
 
+  //search
+  ngOnChanges(changes: SimpleChanges) {
+    this.patients = this.searchResponse;
+  }
+
   getPatients(): void {
-    this.patientsService.getAllPatients()
-      .subscribe(patient => {
-        this.response = patient;
-        this.patients = patient.entry;
-      });
+      this.patientsService.getAllPatients()
+        .subscribe(patient => {
+          this.response = patient;
+          this.patients = patient.entry;
+        });
   }
 
 
