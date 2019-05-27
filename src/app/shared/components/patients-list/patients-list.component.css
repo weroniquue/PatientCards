@@ -12,3 +12,15 @@
   text-align: center;
   font-style: normal;
 }
+
+.uploader-status {
+  margin-top: 50px;
+}
+
+.uploader-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #55c7ed;
+}
+
+.mat-spinner {
+  margin: 0 auto;
+}

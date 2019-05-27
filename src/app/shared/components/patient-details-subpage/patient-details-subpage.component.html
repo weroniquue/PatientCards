@@ -7,11 +7,46 @@
   </mat-expansion-panel-header>
 
   <mat-tab-group>
-    <mat-tab label="First">
-      {{response.id}}
+    <mat-tab label="General">
+      <div class="name">
+        <h3>Name: </h3>
+        <div *ngFor="let name of response.name">
+          <b>{{name.use}}: </b><br>
+          <span *ngFor="let given of name.given">{{given}} </span>
+          <span>{{name.family}}</span>
+        </div>
+
+      </div>
+
+
+      <mat-divider></mat-divider>
+
+      <div>
+        <b>Birth date: </b>{{response.birthDate}} <br>
+        <b>Gender: </b>{{response.gender}}
+      </div>
+
     </mat-tab>
-    <mat-tab label="Second"> Content 2 </mat-tab>
-    <mat-tab label="Third"> Content 3 </mat-tab>
+
+    <mat-tab label="Contacts">
+      <div *ngFor="let addr of response.address">
+        <b>Address: </b>{{addr.line[0]}} <br>
+        <b>City:</b> {{addr.city}} <br>
+        <b>State: </b>{{addr.state}} <br>
+        <b>Post-code: </b>{{addr.postalCode}} <br>
+        <b>Country: </b>{{addr.country}} <br>
+      </div>
+
+
+      <mat-divider></mat-divider>
+
+      <div *ngFor="let phone of response.telecom">
+        <b>System </b>{{phone.system}}<br>
+        <b>Value</b> {{phone.value}} <br>
+      </div>
+    </mat-tab>
+
+
   </mat-tab-group>
 
 </mat-expansion-panel>

@@ -1,10 +1,11 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
-import {ActivatedRoute, Router} from '@angular/router';
 import {PatientsService} from '../../services/patients.service';
-import {EntryEntity, Patient} from '../../models/patient/patient.module';
-import {PatientDetails} from '../../models/patient/patient-details';
+import {PatientList, Entry} from '../../models/patient/patient.module';
+import {Router} from '@angular/router';
+
+
 
 @Component({
   selector: 'app-patients-list',
@@ -18,8 +19,8 @@ export class PatientsListComponent implements OnInit, OnChanges {
 
   itemsPerPage = 10;
   currentPage = 1;
-  patients: EntryEntity[];
-  response: Patient;
+  patients: Entry[];
+  response: PatientList;
 
   constructor(private matIconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer,
@@ -36,7 +37,7 @@ export class PatientsListComponent implements OnInit, OnChanges {
     this.getPatients();
   }
 
-  //search
+  // search
   ngOnChanges(changes: SimpleChanges) {
     this.patients = this.searchResponse;
   }
@@ -65,7 +66,7 @@ export class PatientsListComponent implements OnInit, OnChanges {
   showDetails(id) {
     this.router.navigateByUrl('/Patients/' + id)
       .catch(x => {
-        console.log(x);
+        console.error(x);
       });
   }
 

@@ -10,3 +10,16 @@
 
 ::ng-deep .mat-ink-bar {
   background-color:#55c7ed !important;}
+
+div{
+  padding: 15px;
+}
+
+.name > div{
+  padding-top: 0 !important;
+  padding-bottom: 5px !important;
+}
+
+.name >h3{
+  margin: 2px;
+}

@@ -1,76 +1,124 @@
-import {EntryEntity, LinkEntity} from './patient.module';
-
 export interface PatientDetails {
   resourceType: string;
   id: string;
   meta: Meta;
-  type: string;
-  total: number;
-  link?: (LinkEntity)[] | null;
-  entry?: (EntryEntity)[] | null;
-}
-export interface Meta {
-  lastUpdated: string;
-}
-
-export interface Resource {
-  resourceType: string;
-  id: string;
-  meta: Meta1;
   text: Text;
-  extension?: (ExtensionEntity)[] | null;
-  identifier?: (IdentifierEntity)[] | null;
-  name?: (NameEntity)[] | null;
-  telecom?: (TelecomEntity)[] | null;
+  extension: Extension[];
+  identifier: Identifier[];
+  name: Name[];
+  telecom: Telecom[];
   gender: string;
   birthDate: string;
-  address?: (AddressEntity)[] | null;
-  contact?: (ContactEntity)[] | null;
+  deceasedDateTime: string;
+  address: Address[];
+  maritalStatus: MaritalStatus;
+  multipleBirthBoolean: boolean;
+  communication: Communication[];
+  generalPractitioner: GeneralPractitioner[];
 }
-export interface Meta1 {
-  versionId: string;
-  lastUpdated: string;
+
+interface GeneralPractitioner {
+  reference: string;
 }
-export interface Text {
+
+interface Communication {
+  language: Language;
+}
+
+interface Language {
+  coding: Coding[];
+}
+
+interface MaritalStatus {
+  coding: Coding2[];
+  text: string;
+}
+
+interface Address {
+  extension: Extension3[];
+  line: string[];
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+}
+
+interface Extension3 {
+  url: string;
+  extension: Extension2[];
+}
+
+interface Extension2 {
+  url: string;
+  valueDecimal: number;
+}
+
+interface Telecom {
+  system: string;
+  value: string;
+  use: string;
+}
+
+interface Name {
+  use: string;
+  family: string;
+  given: string[];
+  prefix: string[];
+}
+
+interface Identifier {
+  system: string;
+  value: string;
+  type?: Type;
+}
+
+interface Type {
+  coding: Coding2[];
+}
+
+interface Coding2 {
+  system: string;
+  code: string;
+}
+
+interface Extension {
+  url: string;
+  valueCodeableConcept?: ValueCodeableConcept;
+  valueAddress?: ValueAddress;
+  valueString?: string;
+  valueCode?: string;
+  valueBoolean?: boolean;
+  valueHumanName?: ValueHumanName;
+}
+
+interface ValueHumanName {
+  text: string;
+}
+
+interface ValueAddress {
+  city: string;
+  state: string;
+  country: string;
+}
+
+interface ValueCodeableConcept {
+  coding: Coding[];
+  text: string;
+}
+
+interface Coding {
+  system: string;
+  code: string;
+  display: string;
+}
+
+interface Text {
   status: string;
   div: string;
 }
-export interface ExtensionEntity {
-  url: string;
-  valueTime: string;
-}
-export interface IdentifierEntity {
-  system: string;
-  value: string;
-}
-export interface NameEntity {
-  text: string;
-  family: string;
-  given?: (string)[] | null;
-}
-export interface TelecomEntity {
-  system: string;
-  value: string;
-  use: string;
-}
-export interface AddressEntity {
-  use: string;
-  text: string;
-  city: string;
-  district: string;
-  state: string;
-}
-export interface ContactEntity {
-  relationship?: (RelationshipEntity)[] | null;
-  telecom?: (CodingEntityOrTelecomEntity)[] | null;
-  gender: string;
-}
-export interface RelationshipEntity {
-  coding?: (CodingEntityOrTelecomEntity)[] | null;
-}
-export interface CodingEntityOrTelecomEntity {
-  system: string;
-}
-export interface Search {
-  mode: string;
+
+interface Meta {
+  versionId: string;
+  lastUpdated: string;
+  profile: string[];
 }

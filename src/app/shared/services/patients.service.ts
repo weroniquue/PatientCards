@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {catchError, tap} from 'rxjs/operators';
-import {Patient} from '../models/patient/patient.module';
+import {PatientList} from '../models/patient/patient.module';
 import {PatientDetails} from '../models/patient/patient-details';
 
 const httpOptions = {
@@ -14,22 +13,22 @@ const httpOptions = {
 })
 export class PatientsService {
 
-  private patientsUrl = 'http://hapi.fhir.org/baseDstu3/Patient';
-  private patientsUrlJson = 'http://hapi.fhir.org/baseDstu3/Patient?_format=json&_pretty=true';
-
+  private localUrl = 'http://localhost:8080/baseDstu3';
+  private patientsUrl = this.localUrl + '/Patient';
+  // private patientsUrl = 'http://hapi.fhir.org/baseDstu3/Patient';
 
   constructor(private http: HttpClient) { }
 
-  getAllPatients(): Observable<Patient> {
-    return this.http.get<Patient>(this.patientsUrl);
+  getAllPatients(): Observable<PatientList> {
+    return this.http.get<PatientList>(this.patientsUrl, httpOptions);
   }
 
-  getNextPage(url: string): Observable<Patient> {
-    return this.http.get<Patient>(url);
+  getNextPage(url: string): Observable<PatientList> {
+    return this.http.get<PatientList>(url);
   }
 
   getDetails(id: string): Observable<PatientDetails> {
-    return this.http.get<PatientDetails>(this.patientsUrl + '/' + id + '/$everything');
+    return this.http.get<PatientDetails>(this.patientsUrl + '/' + id, httpOptions);
   }
 
   // TODO

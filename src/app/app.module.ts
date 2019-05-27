@@ -15,7 +15,7 @@ import {
   MatCardModule,
   MatDividerModule,
   MatExpansionModule,
-  MatIconModule,
+  MatIconModule, MatProgressSpinnerModule,
   MatSelectModule,
   MatTabsModule
 } from '@angular/material';
@@ -61,7 +61,8 @@ import { PatientDetailsSubpageComponent } from './shared/components/patient-deta
     NgxMatDrpModule,
     NgxPaginationModule,
     MatExpansionModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,54 +1,153 @@
-export interface Patient {
+export interface PatientList {
   resourceType: string;
   id: string;
   meta: Meta;
   type: string;
-  link?: (LinkEntity)[] | null;
-  entry?: (EntryEntity)[] | null;
+  total: number;
+  link: Link[];
+  entry: Entry[];
 }
-export interface Meta {
-  lastUpdated: string;
-}
-export interface LinkEntity {
-  relation: string;
-  url: string;
-}
-export interface EntryEntity {
+
+export interface Entry {
   fullUrl: string;
   resource: Resource;
   search: Search;
 }
-export interface Resource {
+
+interface Search {
+  mode: string;
+}
+
+interface Resource {
   resourceType: string;
   id: string;
-  meta: Meta1;
+  meta: Meta2;
   text: Text;
-  identifier?: (IdentifierEntity)[] | null;
-  active?: boolean | null;
+  extension: Extension[];
+  identifier: Identifier[];
+  name: Name[];
+  telecom: Telecom[];
   gender: string;
   birthDate: string;
-  deceasedBoolean?: boolean | null;
+  deceasedDateTime?: string;
+  address: Address[];
+  maritalStatus: MaritalStatus;
+  multipleBirthBoolean: boolean;
+  communication: Communication[];
+  generalPractitioner: GeneralPractitioner[];
 }
-export interface Meta1 {
-  versionId: string;
-  lastUpdated: string;
+
+interface GeneralPractitioner {
+  reference: string;
 }
-export interface Text {
+
+interface Communication {
+  language: Language;
+}
+
+interface Language {
+  coding: Coding[];
+}
+
+interface MaritalStatus {
+  coding: Coding2[];
+  text: string;
+}
+
+interface Address {
+  extension: Extension3[];
+  line: string[];
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+}
+
+interface Extension3 {
+  url: string;
+  extension: Extension2[];
+}
+
+interface Extension2 {
+  url: string;
+  valueDecimal: number;
+}
+
+interface Telecom {
+  system: string;
+  value: string;
+  use: string;
+}
+
+interface Name {
+  use: string;
+  family: string;
+  given: string[];
+  prefix?: string[];
+}
+
+interface Identifier {
+  system: string;
+  value: string;
+  type?: Type;
+}
+
+interface Type {
+  coding: Coding2[];
+}
+
+interface Coding2 {
+  system: string;
+  code: string;
+}
+
+interface Extension {
+  url: string;
+  valueCodeableConcept?: ValueCodeableConcept;
+  valueAddress?: ValueAddress;
+  valueString?: string;
+  valueCode?: string;
+  valueBoolean?: boolean;
+  valueHumanName?: ValueHumanName;
+}
+
+interface ValueHumanName {
+  text: string;
+}
+
+interface ValueAddress {
+  city: string;
+  state: string;
+  country: string;
+}
+
+interface ValueCodeableConcept {
+  coding: Coding[];
+  text: string;
+}
+
+interface Coding {
+  system: string;
+  code: string;
+  display: string;
+}
+
+interface Text {
   status: string;
   div: string;
 }
-export interface IdentifierEntity {
-  use: string;
-  type: Type;
-  value: string;
-  assigner: Assigner;
+
+interface Meta2 {
+  versionId: string;
+  lastUpdated: string;
+  profile: string[];
 }
-export interface Type {
-  text: string;
+
+interface Link {
+  relation: string;
+  url: string;
 }
-export interface Assigner {
-  display: string;
-}
-export interface Search {
-  mode: string;
+
+interface Meta {
+  lastUpdated: string;
 }
