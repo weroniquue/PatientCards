@@ -9,14 +9,29 @@
 
     <mgl-timeline-entry *ngFor="let info of details">
 
-      <mgl-timeline-entry-header >{{info.resource.resourceType}}</mgl-timeline-entry-header>
+      <mgl-timeline-entry-header >
+        {{info.resource.resourceType}}
+      </mgl-timeline-entry-header>
 
-      <mgl-timeline-entry-content>
-        Content
+      <mgl-timeline-entry-content *ngIf="info.resource.resourceType == 'Observation'">
+        <span *ngIf="info.resource.code.text">{{info.resource.code.text}} :</span> <br>
+        <span *ngIf="info.resource.valueQuantity">{{info.resource.valueQuantity.value}} {{info.resource.valueQuantity.unit}}</span>
+
+
+      </mgl-timeline-entry-content>
+
+      <mgl-timeline-entry-content *ngIf="info.resource.resourceType == 'MedicationRequest'">
+        XD
+        XD
+      </mgl-timeline-entry-content>
+
+      <mgl-timeline-entry-content *ngIf="info.resource.resourceType == 'MedicationStatement'">
+        XD
+        XD
       </mgl-timeline-entry-content>
 
       <mgl-timeline-entry-side>
-        {{info.resource.effectiveDateTime}}
+        {{info.resource.effectiveDateTime | date:'EEEE, d MMMM y hh:mm'}}
       </mgl-timeline-entry-side>
 
       <mgl-timeline-entry-dot></mgl-timeline-entry-dot>
