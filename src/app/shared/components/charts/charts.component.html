@@ -1,0 +1,29 @@
+<app-patient-details-subpage *ngIf="response" [response]="response"></app-patient-details-subpage>
+
+<mat-tab-group>
+  <mat-tab label="Weight">
+    <div class="charts">
+      <canvas baseChart
+              width="200" height="200"
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+              [plugins]="lineChartPlugins"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Temperature">
+    <div>Next charts</div>
+  </mat-tab>
+
+  <mat-tab label="BMI">
+    <div>Next charts</div>
+  </mat-tab>
+</mat-tab-group>
+
+

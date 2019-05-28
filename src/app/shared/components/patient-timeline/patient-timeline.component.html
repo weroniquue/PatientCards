@@ -5,6 +5,11 @@
 </div>
 
 <div *ngIf="allInformation">
+
+  <div class="moreBtn" *ngIf="more">
+    <button mat-fab (click)= "showCharts()">Charts</button>
+  </div>
+
   <mgl-timeline [toggle]=false>
 
     <mgl-timeline-entry *ngFor="let info of details">

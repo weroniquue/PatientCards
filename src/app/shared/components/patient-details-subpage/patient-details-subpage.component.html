@@ -1,3 +1,18 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2 *ngIf="response">
+        <span *ngFor="let name of response.name[0].given">
+          {{name}}
+        </span>
+        <span>{{response.name[0].family}}</span>
+
+      </h2>
+    </mat-card-title>
+  </mat-card-header>
+</mat-card>
+
+
 <mat-expansion-panel >
   <mat-expansion-panel-header class="header">
     <mat-panel-title>

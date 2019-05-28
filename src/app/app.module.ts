@@ -30,6 +30,8 @@ import {PatientDetailsComponent} from './shared/components/patient-details/patie
 import {NgxMatDrpModule} from 'ngx-mat-daterange-picker';
 import { DatePickerComponent } from './shared/components/date-picker/date-picker.component';
 import { PatientDetailsSubpageComponent } from './shared/components/patient-details-subpage/patient-details-subpage.component';
+import { ChartsComponent } from './shared/components/charts/charts.component';
+import {ChartsModule} from 'ng2-charts';
 
 
 @NgModule({
@@ -43,6 +45,7 @@ import { PatientDetailsSubpageComponent } from './shared/components/patient-deta
     PatientDetailsComponent,
     DatePickerComponent,
     PatientDetailsSubpageComponent,
+    ChartsComponent,
 
   ],
   imports: [
@@ -63,6 +66,7 @@ import { PatientDetailsSubpageComponent } from './shared/components/patient-deta
     MatExpansionModule,
     MatTabsModule,
     MatProgressSpinnerModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

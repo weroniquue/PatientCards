@@ -1,17 +1,3 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      <h2 *ngIf="response">
-        <span *ngFor="let name of response.name[0].given">
-          {{name}}
-        </span>
-        <span>{{response.name[0].family}}</span>
-
-      </h2>
-    </mat-card-title>
-  </mat-card-header>
-</mat-card>
-
 <app-patient-details-subpage *ngIf="response" [response]="response"></app-patient-details-subpage>
 
 <app-patient-timeline *ngIf="response" [id]="id" ></app-patient-timeline>

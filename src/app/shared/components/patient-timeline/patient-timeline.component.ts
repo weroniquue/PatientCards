@@ -39,6 +39,7 @@ export class PatientTimelineComponent implements OnInit {
       });
   }
 
+
   moreInformation() {
     if(this.allInformation.link.find(k => k.relation === 'next') == undefined){
       this.more = false;
@@ -57,10 +58,20 @@ export class PatientTimelineComponent implements OnInit {
 
   filterList(array) {
     return array.filter(item =>
-        (item.resource.resourceType == 'Observation'
-          || item.resource.resourceType == 'MedicationRequest'
-          || item.resource.resourceType == 'MedicationStatement')
+      (item.resource.resourceType == 'Observation'
+        || item.resource.resourceType == 'MedicationRequest'
+        || item.resource.resourceType == 'MedicationStatement')
     );
+  }
+
+  sortArray(array) {
+    return array.sort(function (a, b) {
+      return +new Date(b.resource.effectiveDateTime) - +new Date(a.resource.effectiveDateTime);
+    });
+  }
+
+  showCharts() {
+    this.router.navigateByUrl('/Patients/' + this.id + '/charts');
   }
 }
 
