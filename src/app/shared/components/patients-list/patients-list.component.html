@@ -1,19 +1,19 @@
 <div class="uploader-status">
-<mat-spinner *ngIf="!patients"></mat-spinner>
+  <mat-spinner *ngIf="!response"></mat-spinner>
 </div>
 
-<div *ngIf="patients">
-  <h2 *ngIf="patients.length == 0" class="error">Patient not found</h2>
-
+<div *ngIf="response">
+  <h2 *ngIf="response.total == 0" class="error">Patient not found</h2>
   <mat-action-list class="patient-list">
     <mat-list-item *ngFor="let patient of patients |
     paginate : {itemsPerPage: itemsPerPage, currentPage: currentPage, total: response.total}" (click)="showDetails(patient.resource.id)">
       <mat-icon mat-list-icon svgIcon="patient"></mat-icon>
       <h4 mat-line>
-        <span *ngFor="let name of patient.name">
-          {{name.family}}
+        <span *ngFor="let name of patient.resource.name[0].given">
+          {{name}}
         </span>
-        id: {{patient.resource.id}}
+        <span>{{patient.resource.name[0].family}}</span>
+
       </h4>
 
       <p mat-line> Date of birth: {{patient.resource.birthDate}}</p>

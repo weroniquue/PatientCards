@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PatientDetails} from '../../models/patient/patient-details';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PatientsService} from '../../services/patients.service';
+import {PatientList} from '../../models/patient/patient.module';
 
 @Component({
   selector: 'app-patient-details',
@@ -26,11 +27,15 @@ export class PatientDetailsComponent implements OnInit {
 
     this.patientsService.getDetails(this.id)
       .subscribe(response => {
-        console.log(response);
+        // console.log(response);
         this.response = response;
       }, () => {
         this.router.navigateByUrl('/pageNotFound');
       });
+
+
   }
+
+
 
 }

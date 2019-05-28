@@ -43,9 +43,9 @@ export class PatientsListComponent implements OnInit, OnChanges {
   // search
   ngOnChanges(changes: SimpleChanges) {
     if (this.searchResponse) {
-      console.log(this.searchResponse);
       this.response = this.searchResponse;
       this.patients = this.searchResponse.entry;
+      console.log(this.searchResponse);
     }
   }
 
@@ -55,6 +55,7 @@ export class PatientsListComponent implements OnInit, OnChanges {
           this.response = patient;
           this.patients = patient.entry;
           this.response.total = patient.total ? patient.total : 9000;
+          console.log(this.patients);
         });
   }
 
