@@ -14,13 +14,13 @@ const httpOptions = {
 export class PatientsService {
 
   private localUrl = 'http://localhost:8080/baseDstu3';
-  private patientsUrl = this.localUrl + '/Patient';
-  // private patientsUrl = 'http://hapi.fhir.org/baseDstu3/Patient';
+  // private patientsUrl = this.localUrl + '/Patient';
+  private patientsUrl = 'http://hapi.fhir.org/baseDstu3/Patient';
 
   constructor(private http: HttpClient) { }
 
   getAllPatients(): Observable<PatientList> {
-    return this.http.get<PatientList>(this.patientsUrl, httpOptions);
+    return this.http.get<PatientList>(this.patientsUrl);
   }
 
   getNextPage(url: string): Observable<PatientList> {
@@ -31,16 +31,5 @@ export class PatientsService {
     return this.http.get<PatientDetails>(this.patientsUrl + '/' + id, httpOptions);
   }
 
-  // TODO
-  findPatientByName(name: string): Observable<any> {
-    if (!name.trim()) {
-      return of([]);
-    }
-    console.log(name + 'Service');
-
-    console.log('TODO FIND PATIENT- service');
-    return of([]);
-    //this.http.get<any>();
-  }
 
 }

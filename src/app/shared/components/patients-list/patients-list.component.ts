@@ -14,11 +14,11 @@ import {Router} from '@angular/router';
 })
 export class PatientsListComponent implements OnInit, OnChanges {
 
-  // TODO sprawdź typ
-  @Input() searchResponse: any;
+  @Input() searchName: string;
 
   itemsPerPage = 10;
   currentPage = 1;
+  total = 0;
   patients: Entry[];
   response: PatientList;
 
@@ -39,7 +39,7 @@ export class PatientsListComponent implements OnInit, OnChanges {
 
   // search
   ngOnChanges(changes: SimpleChanges) {
-    this.patients = this.searchResponse;
+    this.filterPatients();
   }
 
   getPatients(): void {
@@ -47,22 +47,41 @@ export class PatientsListComponent implements OnInit, OnChanges {
         .subscribe(patient => {
           this.response = patient;
           this.patients = patient.entry;
+          this.total = patient.total;
+          //this.nextElements();
         });
+
   }
 
+  //item.first_name.toLowerCase().indexOf(args.toLowerCase()) > -1
+  filterPatients(): void {
+    if (this.patients) {
+      console.log(this.searchName);
+      console.log(this.patients);
+      this.patients.filter(item => {
+        item.resource.name.forEach(name => {
+          console.log(name.family.toLowerCase().indexOf(this.searchName.toLowerCase()));
+        });
+      });
+    }
+  }
 
-  nextPage(event): void {
-    if ((this.patients.length / event) == this.itemsPerPage) {
+  nextElements(): void {
+    if (this.response.link.find(k => k.relation == 'next') !== undefined) {
       this.patientsService.getNextPage(this.response.link.find(k => k.relation == 'next').url)
         .subscribe(patient => {
           this.patients = this.patients.concat(patient.entry);
           this.response = patient;
+          this.nextElements();
         });
     }
+  }
+
+
+  nextPage(event): void {
     this.currentPage = event;
 
   }
-
   showDetails(id) {
     this.router.navigateByUrl('/Patients/' + id)
       .catch(x => {
