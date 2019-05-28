@@ -31,5 +31,9 @@ export class PatientsService {
     return this.http.get<PatientDetails>(this.patientsUrl + '/' + id, httpOptions);
   }
 
+  findPatientByName(name: string): Observable<PatientList> {
+    return this.http.get<PatientList>(this.patientsUrl + '/' + '?name=' + name);
+  }
+
 
 }

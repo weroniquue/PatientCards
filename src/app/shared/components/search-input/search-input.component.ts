@@ -8,7 +8,9 @@ import {PatientsService} from '../../services/patients.service';
   styleUrls: ['./search-input.component.css']
 })
 export class SearchInputComponent implements OnInit {
+
   searchName: string;
+  searchResponse: PatientList;
 
   constructor(private patientsService: PatientsService) { }
 
@@ -17,6 +19,16 @@ export class SearchInputComponent implements OnInit {
 
   findPatientByName(event: any): void {
     this.searchName = event.target.value;
-
   }
+
+  search() {
+    console.log('Szukaj z nazwą: ' + this.searchName);
+    this.patientsService.findPatientByName(this.searchName)
+      .subscribe(response => {
+        this.searchResponse = response;
+        console.log(response);
+      });
+  }
+
+
 }

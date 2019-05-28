@@ -1,10 +1,9 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {PatientsService} from '../../services/patients.service';
-import {PatientList, Entry} from '../../models/patient/patient.module';
-import {Router} from '@angular/router';
-
+import {Entry, PatientList} from '../../models/patient/patient.module';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -14,17 +13,17 @@ import {Router} from '@angular/router';
 })
 export class PatientsListComponent implements OnInit, OnChanges {
 
-  @Input() searchName: string;
+  @Input() searchResponse: PatientList;
 
   itemsPerPage = 10;
   currentPage = 1;
-  total = 0;
   patients: Entry[];
   response: PatientList;
 
   constructor(private matIconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer,
               private router: Router,
+              private activatedRoute: ActivatedRoute,
               private patientsService: PatientsService) {
 
     this.matIconRegistry.addSvgIcon(
@@ -34,12 +33,20 @@ export class PatientsListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.getPatients();
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      const page = params['page'];
+      this.getPatients();
+    });
   }
 
   // search
   ngOnChanges(changes: SimpleChanges) {
-    this.filterPatients();
+    if (this.searchResponse) {
+      console.log(this.searchResponse);
+      this.response = this.searchResponse;
+      this.patients = this.searchResponse.entry;
+    }
   }
 
   getPatients(): void {
@@ -47,24 +54,16 @@ export class PatientsListComponent implements OnInit, OnChanges {
         .subscribe(patient => {
           this.response = patient;
           this.patients = patient.entry;
-          this.total = patient.total;
-          //this.nextElements();
+          this.response.total = patient.total ? patient.total : 9000;
         });
-
   }
 
-  //item.first_name.toLowerCase().indexOf(args.toLowerCase()) > -1
-  filterPatients(): void {
-    if (this.patients) {
-      console.log(this.searchName);
-      console.log(this.patients);
-      this.patients.filter(item => {
-        item.resource.name.forEach(name => {
-          console.log(name.family.toLowerCase().indexOf(this.searchName.toLowerCase()));
-        });
-      });
-    }
+  nextPage(event): void {
+
+    this.nextElements();
+    this.currentPage = event;
   }
+
 
   nextElements(): void {
     if (this.response.link.find(k => k.relation == 'next') !== undefined) {
@@ -72,16 +71,11 @@ export class PatientsListComponent implements OnInit, OnChanges {
         .subscribe(patient => {
           this.patients = this.patients.concat(patient.entry);
           this.response = patient;
-          this.nextElements();
+          // this.nextElements();
         });
     }
   }
 
-
-  nextPage(event): void {
-    this.currentPage = event;
-
-  }
   showDetails(id) {
     this.router.navigateByUrl('/Patients/' + id)
       .catch(x => {

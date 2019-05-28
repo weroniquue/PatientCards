@@ -4,6 +4,7 @@ import {PatientsListComponent} from './shared/components/patients-list/patients-
 import {PageNotFoundComponent} from './shared/components/page-not-found/page-not-found.component';
 import {PatientDetailsComponent} from './shared/components/patient-details/patient-details.component';
 import {SearchInputComponent} from './shared/components/search-input/search-input.component';
+import {PatientDetailsSubpageComponent} from './shared/components/patient-details-subpage/patient-details-subpage.component';
 
 
 const routes: Routes = [

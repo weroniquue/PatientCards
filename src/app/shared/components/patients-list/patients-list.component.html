@@ -3,18 +3,17 @@
 </div>
 
 <div *ngIf="patients">
-
   <h2 *ngIf="patients.length == 0" class="error">Patient not found</h2>
+
   <mat-action-list class="patient-list">
     <mat-list-item *ngFor="let patient of patients |
-    paginate : {itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: total}" (click)="showDetails(patient.resource.id)">
-
+    paginate : {itemsPerPage: itemsPerPage, currentPage: currentPage, total: response.total}" (click)="showDetails(patient.resource.id)">
       <mat-icon mat-list-icon svgIcon="patient"></mat-icon>
       <h4 mat-line>
         <span *ngFor="let name of patient.name">
           {{name.family}}
         </span>
-        Imię i nazwisko, id: {{patient.resource.id}}
+        id: {{patient.resource.id}}
       </h4>
 
       <p mat-line> Date of birth: {{patient.resource.birthDate}}</p>
