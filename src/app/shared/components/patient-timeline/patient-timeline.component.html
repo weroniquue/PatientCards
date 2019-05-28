@@ -7,11 +7,13 @@
 <div *ngIf="allInformation">
   <mgl-timeline [toggle]=false>
 
-    <mgl-timeline-entry *ngFor="let info of allInformation.entry">
+    <mgl-timeline-entry *ngFor="let info of details">
 
       <mgl-timeline-entry-header >{{info.resource.resourceType}}</mgl-timeline-entry-header>
 
-      <mgl-timeline-entry-content>Content</mgl-timeline-entry-content>
+      <mgl-timeline-entry-content>
+        Content
+      </mgl-timeline-entry-content>
 
       <mgl-timeline-entry-side>
         {{info.resource.effectiveDateTime}}
@@ -22,7 +24,9 @@
     </mgl-timeline-entry>
   </mgl-timeline>
 
-  <button mat-fab (click)= "moreInformation()">More</button>
+  <div class="moreBtn" *ngIf="more">
+    <button mat-fab (click)= "moreInformation()">More</button>
+  </div>
 
 
 </div>
