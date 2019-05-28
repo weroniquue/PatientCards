@@ -41,5 +41,11 @@ export class PatientsService {
     return this.http.get<EverythingResponse>(this.patientsUrl + '/' + id + '/$everything', httpOptions);
   }
 
+  getMoreEverything(url: string): Observable<EverythingResponse> {
+    return this.http.get<EverythingResponse>(url, httpOptions);
+  }
+
+
+
 
 }

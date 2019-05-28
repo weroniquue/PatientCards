@@ -62,7 +62,7 @@ import { PatientDetailsSubpageComponent } from './shared/components/patient-deta
     NgxPaginationModule,
     MatExpansionModule,
     MatTabsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

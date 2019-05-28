@@ -40,8 +40,20 @@ export class PatientTimelineComponent implements OnInit {
       });
   }
 
+  moreInformation() {
+    console.log('more');
+    /*this.patientsService.getMoreEverything(this.allInformation.link)
+      .subscribe(response => {
+        console.log(response);
+        this.allInformation = response;
+        this.allInformation.entry = response.entry.filter(item =>
+          item.resource.resourceType !== 'Patient'
+        );
 
-
+      }, () => {
+        this.router.navigateByUrl('/pageNotFound');
+      });*/
+  }
 }
 
 
