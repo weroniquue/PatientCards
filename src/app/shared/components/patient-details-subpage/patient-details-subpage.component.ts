@@ -10,8 +10,6 @@ import {PatientsService} from '../../services/patients.service';
 })
 export class PatientDetailsSubpageComponent implements OnInit {
 
-  //@Input() response: PatientDetails;
-
   id: string;
   response: PatientDetails;
 

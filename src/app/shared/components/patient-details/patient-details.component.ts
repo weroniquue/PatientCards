@@ -12,7 +12,6 @@ import {PatientList} from '../../models/patient/patient.module';
 export class PatientDetailsComponent implements OnInit {
 
   id: string;
-  //response: PatientDetails;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -20,23 +19,7 @@ export class PatientDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-    //this.getPatientDetails();
+
   }
-
-  /*getPatientDetails(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-
-    this.patientsService.getDetails(this.id)
-      .subscribe(response => {
-        // console.log(response);
-        this.response = response;
-      }, () => {
-        this.router.navigateByUrl('/pageNotFound');
-      });
-
-
-  }*/
-
-
 
 }

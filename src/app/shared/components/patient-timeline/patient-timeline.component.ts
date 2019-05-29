@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {PatientsService} from '../../services/patients.service';
-import {PatientDetails} from '../../models/patient/patient-details';
-import {Entry, PatientList} from '../../models/patient/patient.module';
 import {EntryEntity, EverythingResponse} from '../../models/patient/everythingResponse';
 
 @Component({
@@ -34,6 +32,9 @@ export class PatientTimelineComponent implements OnInit {
         console.log(response);
         this.allInformation = response;
         this.details = this.filterList(response.entry);
+        if (this.details.length == 0) {
+          this.moreInformation();
+        }
       }, () => {
         this.router.navigateByUrl('/pageNotFound');
       });
@@ -49,6 +50,7 @@ export class PatientTimelineComponent implements OnInit {
       this.patientsService.getMoreEverything(this.allInformation.link.find(k => k.relation === 'next').url)
         .subscribe(response => {
           this.allInformation = response;
+          console.log(response.entry);
           this.details = this.details.concat(this.filterList(response.entry));
         }, () => {
           this.router.navigateByUrl('/pageNotFound');

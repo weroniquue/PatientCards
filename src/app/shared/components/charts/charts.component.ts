@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PatientsService} from '../../services/patients.service';
 import {BaseChartDirective, Color, Label} from 'ng2-charts';
 import {ChartDataSets, ChartOptions} from 'chart.js';
+import {ObservationService} from '../../services/observation.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-charts',
@@ -13,12 +15,12 @@ import {ChartDataSets, ChartOptions} from 'chart.js';
 export class ChartsComponent implements OnInit {
 
   id: string;
-  response: PatientDetails;
+  bmiRespone: Observation;
 
   public lineChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    { data: [], label: 'BMI' },
   ];
-  public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartLabels: Label[] = [];
 
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
     responsive: true,
@@ -29,16 +31,6 @@ export class ChartsComponent implements OnInit {
         {
           id: 'y-axis-0',
           position: 'left',
-        },
-        {
-          id: 'y-axis-1',
-          position: 'right',
-          gridLines: {
-            color: 'rgba(255,0,0,0.3)',
-          },
-          ticks: {
-            fontColor: 'red',
-          }
         }
       ]
     },
@@ -61,8 +53,8 @@ export class ChartsComponent implements OnInit {
     },
   };
   public lineChartColors: Color[] = [
-    { // red
-      //backgroundColor: 'rgba(255,0,0,0.3)',
+    {
+      backgroundColor: 'rgba(255,0,0,0.3)',
       borderColor: 'red',
       pointBackgroundColor: 'rgba(148,159,177,1)',
       pointBorderColor: '#fff',
@@ -70,7 +62,7 @@ export class ChartsComponent implements OnInit {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
-  public lineChartLegend = true;
+  public lineChartLegend = false;
   public lineChartType = 'line';
 
 
@@ -79,10 +71,29 @@ export class ChartsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private patientsService: PatientsService) { }
+              private patientsService: PatientsService,
+              private observationService: ObservationService) { }
 
   ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get('id');
 
+    this.getBMI();
+  }
+
+  getBMI() {
+    this.observationService.getBMI(this.id)
+      .subscribe(response => {
+        console.log(response);
+        this.bmiRespone = response;
+        if (this.bmiRespone) {
+          this.bmiRespone.entry.forEach(item => {
+            this.lineChartLabels.push(item.resource.effectiveDateTime);
+            this.lineChartData[0].data.push(item.resource.valueQuantity.value);
+          });
+        }
+
+
+      });
   }
 
   // events
