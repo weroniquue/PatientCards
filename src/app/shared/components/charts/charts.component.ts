@@ -82,19 +82,7 @@ export class ChartsComponent implements OnInit {
               private patientsService: PatientsService) { }
 
   ngOnInit() {
-    this.getPatientDetails();
-  }
 
-  getPatientDetails(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-
-    this.patientsService.getDetails(this.id)
-      .subscribe(response => {
-        // console.log(response);
-        this.response = response;
-      }, () => {
-        this.router.navigateByUrl('/pageNotFound');
-      });
   }
 
   // events

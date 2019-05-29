@@ -12,17 +12,18 @@ import {PatientList} from '../../models/patient/patient.module';
 export class PatientDetailsComponent implements OnInit {
 
   id: string;
-  response: PatientDetails;
+  //response: PatientDetails;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private patientsService: PatientsService) { }
 
   ngOnInit() {
-    this.getPatientDetails();
+    this.id = this.route.snapshot.paramMap.get('id');
+    //this.getPatientDetails();
   }
 
-  getPatientDetails(): void {
+  /*getPatientDetails(): void {
     this.id = this.route.snapshot.paramMap.get('id');
 
     this.patientsService.getDetails(this.id)
@@ -34,7 +35,7 @@ export class PatientDetailsComponent implements OnInit {
       });
 
 
-  }
+  }*/
 
 
 
