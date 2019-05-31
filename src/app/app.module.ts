@@ -32,6 +32,7 @@ import { DatePickerComponent } from './shared/components/date-picker/date-picker
 import { PatientDetailsSubpageComponent } from './shared/components/patient-details-subpage/patient-details-subpage.component';
 import { ChartsComponent } from './shared/components/charts/charts.component';
 import {ChartsModule} from 'ng2-charts';
+import {DatePipe} from '@angular/common';
 
 
 @NgModule({
@@ -68,7 +69,7 @@ import {ChartsModule} from 'ng2-charts';
     MatProgressSpinnerModule,
     ChartsModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

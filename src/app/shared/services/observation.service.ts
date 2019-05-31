@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {PatientList} from '../models/patient/patient.module';
+import {ObservationType} from '../models/Enums';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +13,30 @@ export class ObservationService {
   private observationUrl = this.localUrl + '/Observation';
 
   private bmiCode = '39156-5';
+  private weigthCode = '29463-7';
+  private temperatureCode = '29463-7';
 
   constructor(private http: HttpClient) { }
 
-  getBMI(id: string): Observable<Observation> {
-    return this.http.get<Observation>(this.observationUrl + '?patient=' + id + '&code=' + this.bmiCode + '&_sort=date');
+  getObservation(id: string, type: ObservationType): Observable<Observation> {
+    switch (type) {
+      case ObservationType.TEMPERATURE: {
+        return this.getData(id, this.temperatureCode)
+        break;
+      }
+      case ObservationType.BMI: {
+        return  this.getData(id, this.bmiCode)
+        break;
+      }
+      case ObservationType.WEIGHT: {
+        return this.getData(id, this.weigthCode)
+        break;
+      }
+    }
   }
+
+  getData(id: string, code: string) {
+    return this.http.get<Observation>(this.observationUrl + '?patient=' + id + '&code=' + code + '&_sort=date');
+  }
+
 }

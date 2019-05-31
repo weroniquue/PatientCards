@@ -4,25 +4,9 @@
   <mat-tab label="BMI">
     <div class="charts">
       <canvas baseChart
-              width="200" height="200"
+              width="50" height="50"
               [datasets]="BMIData"
-              [labels]="lineChartLabels"
-              [options]="lineChartOptions"
-              [colors]="lineChartColors"
-              [legend]="lineChartLegend"
-              [chartType]="lineChartType"
-              [plugins]="lineChartPlugins"
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"></canvas>
-    </div>
-  </mat-tab>
-
-  <mat-tab label="Temperature">
-    <div class="charts">
-      <canvas baseChart
-              width="200" height="200"
-              [datasets]="BMIData"
-              [labels]="lineChartLabels"
+              [labels]="lineChartLabelsBMI"
               [options]="lineChartOptions"
               [colors]="lineChartColors"
               [legend]="lineChartLegend"
@@ -34,7 +18,19 @@
   </mat-tab>
 
   <mat-tab label="Weight">
-    <div>Next charts</div>
+    <div class="charts">
+      <canvas baseChart
+              width="50" height="50"
+              [datasets]="weightData"
+              [labels]="lineChartLabelsWeight"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+              [plugins]="lineChartPlugins"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+    </div>
   </mat-tab>
 </mat-tab-group>
 

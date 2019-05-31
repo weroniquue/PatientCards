@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {PatientDetails} from '../../models/patient/patient-details';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PatientsService} from '../../services/patients.service';
 import {BaseChartDirective, Color, Label} from 'ng2-charts';
 import {ChartDataSets, ChartOptions} from 'chart.js';
 import {ObservationService} from '../../services/observation.service';
 import {DatePipe} from '@angular/common';
+import {ObservationType} from '../../models/Enums';
 
 @Component({
   selector: 'app-charts',
@@ -16,17 +16,29 @@ export class ChartsComponent implements OnInit {
 
   id: string;
   bmiRespone: Observation;
+  weightResponse: Observation;
 
   public BMIData: ChartDataSets[] = [
     { data: [], label: 'BMI' },
   ];
-  public lineChartLabels: Label[] = [];
+
+  public lineChartLabelsBMI: Label[] = [];
+
+  public weightData: ChartDataSets[] = [
+    { data: [], label: 'Weight' },
+  ];
+  public lineChartLabelsWeight: Label[] = [];
 
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
     responsive: true,
     scales: {
       // We use this empty structure as a placeholder for dynamic theming.
-      xAxes: [{}],
+      xAxes: [{
+        type: 'time',
+        time: {
+          unit: 'quarter'
+        }
+      }],
       yAxes: [
         {
           id: 'y-axis-0',
@@ -40,7 +52,6 @@ export class ChartsComponent implements OnInit {
           type: 'line',
           mode: 'vertical',
           scaleID: 'x-axis-0',
-          value: 'March',
           borderColor: 'orange',
           borderWidth: 2,
           label: {
@@ -72,29 +83,57 @@ export class ChartsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private patientsService: PatientsService,
-              private observationService: ObservationService) { }
+              private observationService: ObservationService,
+              public datepipe: DatePipe) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
 
     this.getBMI();
+    this.getWeight();
   }
 
   getBMI() {
-    this.observationService.getBMI(this.id)
+    this.observationService.getObservation(this.id, ObservationType.BMI)
       .subscribe(response => {
         console.log(response);
         this.bmiRespone = response;
         if (this.bmiRespone) {
+          const bmi = []
           this.bmiRespone.entry.forEach(item => {
-            this.lineChartLabels.push(item.resource.effectiveDateTime);
-            this.BMIData[0].data.push(item.resource.valueQuantity.value);
+
+            const date = this.datepipe.transform(item.resource.effectiveDateTime, 'yyyy-MM-dd hh:mm');
+            this.lineChartLabelsBMI.push(date);
+            bmi.push(item.resource.valueQuantity.value.toFixed(2));
           });
+
+          this.BMIData[0].data = bmi;
+          this.BMIData[0].label = 'BMI ' + this.bmiRespone.entry[0].resource.valueQuantity.unit;
         }
-
-
       });
   }
+
+  getWeight() {
+    this.observationService.getObservation(this.id, ObservationType.WEIGHT)
+      .subscribe(response => {
+        console.log(response);
+        this.weightResponse = response;
+        if (this.weightResponse) {
+          const weight = []
+          this.weightResponse.entry.forEach(item => {
+
+            const date = this.datepipe.transform(item.resource.effectiveDateTime, 'yyyy-MM-dd hh:mm');
+            this.lineChartLabelsWeight.push(date);
+            weight.push(item.resource.valueQuantity.value.toFixed(2));
+          });
+
+          this.weightData[0].data = weight;
+          this.weightData[0].label = 'Weight ' + this.weightResponse.entry[0].resource.valueQuantity.unit;
+        }
+      });
+  }
+
+
 
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
