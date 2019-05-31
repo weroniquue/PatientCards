@@ -5,7 +5,7 @@
     <div class="charts">
       <canvas baseChart
               width="200" height="200"
-              [datasets]="lineChartData"
+              [datasets]="BMIData"
               [labels]="lineChartLabels"
               [options]="lineChartOptions"
               [colors]="lineChartColors"
@@ -18,7 +18,19 @@
   </mat-tab>
 
   <mat-tab label="Temperature">
-    <div>Next charts</div>
+    <div class="charts">
+      <canvas baseChart
+              width="200" height="200"
+              [datasets]="BMIData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+              [plugins]="lineChartPlugins"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+    </div>
   </mat-tab>
 
   <mat-tab label="Weight">

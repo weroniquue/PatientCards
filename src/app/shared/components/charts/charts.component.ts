@@ -17,7 +17,7 @@ export class ChartsComponent implements OnInit {
   id: string;
   bmiRespone: Observation;
 
-  public lineChartData: ChartDataSets[] = [
+  public BMIData: ChartDataSets[] = [
     { data: [], label: 'BMI' },
   ];
   public lineChartLabels: Label[] = [];
@@ -88,7 +88,7 @@ export class ChartsComponent implements OnInit {
         if (this.bmiRespone) {
           this.bmiRespone.entry.forEach(item => {
             this.lineChartLabels.push(item.resource.effectiveDateTime);
-            this.lineChartData[0].data.push(item.resource.valueQuantity.value);
+            this.BMIData[0].data.push(item.resource.valueQuantity.value);
           });
         }
 
