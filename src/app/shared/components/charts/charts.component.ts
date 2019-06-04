@@ -6,6 +6,7 @@ import {ChartDataSets, ChartOptions} from 'chart.js';
 import {ObservationService} from '../../services/observation.service';
 import {DatePipe} from '@angular/common';
 import {ObservationType} from '../../models/Enums';
+import {Range} from '../../utils/DatePickerConfig';
 
 @Component({
   selector: 'app-charts',
@@ -105,7 +106,7 @@ export class ChartsComponent implements OnInit {
       .subscribe(response => {
         this.bmiRespone = response;
         if (this.bmiRespone.entry) {
-          //const bmi = [];
+
           this.bmiRespone.entry.forEach(item => {
 
             const date = this.datepipe.transform(item.resource.effectiveDateTime, 'yyyy-MM-dd hh:mm');
@@ -158,14 +159,15 @@ export class ChartsComponent implements OnInit {
 
     if (this.weightData[0].data.length > 0) {
 
+      console.log(range);
       const fromDate = new Date(range.fromDate);
       const toDate = new Date(range.toDate);
 
-      const startIndex = this.lineChartLabelsWeight.findIndex(function (ele) {
-        return new Date(ele) > fromDate;
+      const startIndex = this.lineChartLabelsWeight.findIndex(ele => {
+        return fromDate < new Date(ele);
       });
 
-      const endIndex = this.lineChartLabelsWeight.findIndex(function (ele) {
+      const endIndex = this.lineChartLabelsWeight.findIndex(ele => {
         return new Date(ele) > toDate;
       });
 

@@ -26,18 +26,23 @@
       </mgl-timeline-entry-content>
 
       <mgl-timeline-entry-content *ngIf="info.resource.resourceType == 'MedicationRequest'">
-        XD
-        XD
+        {{info.resource.medicationCodeableConcept.text}}
+        <p>status: {{info.resource.status}}</p>
       </mgl-timeline-entry-content>
 
       <mgl-timeline-entry-content *ngIf="info.resource.resourceType == 'MedicationStatement'">
-        XD
-        XD
+
       </mgl-timeline-entry-content>
 
-      <mgl-timeline-entry-side>
+      <mgl-timeline-entry-side *ngIf="info.resource.resourceType == 'Observation'">
         {{info.resource.effectiveDateTime | date:'EEEE, d MMMM y hh:mm'}}
       </mgl-timeline-entry-side>
+
+      <mgl-timeline-entry-side *ngIf="info.resource.resourceType == 'MedicationRequest'">
+        {{info.resource.authoredOn | date:'EEEE, d MMMM y hh:mm'}}
+      </mgl-timeline-entry-side>
+
+
 
       <mgl-timeline-entry-dot></mgl-timeline-entry-dot>
 
