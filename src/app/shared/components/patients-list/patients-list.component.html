@@ -1,5 +1,9 @@
+<div class="error">
+  <h2 *ngIf="!loading && !response">{{errorMsg}}</h2>
+</div>
+
 <div class="uploader-status">
-  <mat-spinner *ngIf="!response"></mat-spinner>
+  <mat-spinner *ngIf="loading"></mat-spinner>
 </div>
 
 <div *ngIf="response">

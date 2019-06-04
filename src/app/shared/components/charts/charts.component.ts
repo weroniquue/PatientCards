@@ -17,6 +17,7 @@ export class ChartsComponent implements OnInit {
   id: string;
   bmiRespone: Observation;
   weightResponse: Observation;
+  message: String;
 
   public BMIData: ChartDataSets[] = [
     { data: [], label: 'BMI' },
@@ -96,10 +97,9 @@ export class ChartsComponent implements OnInit {
   getBMI() {
     this.observationService.getObservation(this.id, ObservationType.BMI)
       .subscribe(response => {
-        console.log(response);
         this.bmiRespone = response;
-        if (this.bmiRespone) {
-          const bmi = []
+        if (this.bmiRespone.entry) {
+          const bmi = [];
           this.bmiRespone.entry.forEach(item => {
 
             const date = this.datepipe.transform(item.resource.effectiveDateTime, 'yyyy-MM-dd hh:mm');
@@ -109,6 +109,8 @@ export class ChartsComponent implements OnInit {
 
           this.BMIData[0].data = bmi;
           this.BMIData[0].label = 'BMI ' + this.bmiRespone.entry[0].resource.valueQuantity.unit;
+        } else {
+          this.message = 'Data are not available';
         }
       });
   }
@@ -116,19 +118,20 @@ export class ChartsComponent implements OnInit {
   getWeight() {
     this.observationService.getObservation(this.id, ObservationType.WEIGHT)
       .subscribe(response => {
-        console.log(response);
         this.weightResponse = response;
-        if (this.weightResponse) {
-          const weight = []
+        if (this.weightResponse.entry) {
+          console.log(this.weightResponse)
+          const weight = [];
           this.weightResponse.entry.forEach(item => {
 
             const date = this.datepipe.transform(item.resource.effectiveDateTime, 'yyyy-MM-dd hh:mm');
             this.lineChartLabelsWeight.push(date);
             weight.push(item.resource.valueQuantity.value.toFixed(2));
           });
-
           this.weightData[0].data = weight;
-          this.weightData[0].label = 'Weight ' + this.weightResponse.entry[0].resource.valueQuantity.unit;
+          this.weightData[0].label = 'weight ' + this.weightResponse.entry[0].resource.valueQuantity.unit;
+        } else {
+          this.message = 'Data are not available';
         }
       });
   }

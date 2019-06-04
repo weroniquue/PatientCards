@@ -19,6 +19,8 @@ export class PatientsListComponent implements OnInit, OnChanges {
   currentPage = 1;
   patients: Entry[];
   response: PatientList;
+  loading  = true;
+  errorMsg: String;
 
   constructor(private matIconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer,
@@ -55,7 +57,12 @@ export class PatientsListComponent implements OnInit, OnChanges {
           this.response = patient;
           this.patients = patient.entry;
           this.response.total = patient.total ? patient.total : 9000;
+          this.loading = false
           console.log(this.patients);
+        }, error => {
+          this.loading = false;
+          this.errorMsg = error.message;
+          console.log(error);
         });
   }
 

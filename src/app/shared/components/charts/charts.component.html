@@ -3,7 +3,7 @@
 <mat-tab-group>
   <mat-tab label="BMI">
     <div class="charts">
-      <canvas baseChart
+      <canvas baseChart *ngIf="!message"
               width="50" height="50"
               [datasets]="BMIData"
               [labels]="lineChartLabelsBMI"
@@ -14,12 +14,15 @@
               [plugins]="lineChartPlugins"
               (chartHover)="chartHovered($event)"
               (chartClick)="chartClicked($event)"></canvas>
+
+      <h2 *ngIf="message" style="color: red">{{message}}</h2>
+
     </div>
   </mat-tab>
 
   <mat-tab label="Weight">
-    <div class="charts">
-      <canvas baseChart
+    <div class="charts" >
+      <canvas baseChart *ngIf="!message"
               width="50" height="50"
               [datasets]="weightData"
               [labels]="lineChartLabelsWeight"
@@ -30,6 +33,9 @@
               [plugins]="lineChartPlugins"
               (chartHover)="chartHovered($event)"
               (chartClick)="chartClicked($event)"></canvas>
+
+      <h2 *ngIf="message" style="color: red">{{message}}</h2>
+
     </div>
   </mat-tab>
 </mat-tab-group>
