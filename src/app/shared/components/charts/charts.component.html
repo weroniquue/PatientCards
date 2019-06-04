@@ -1,5 +1,7 @@
 <app-patient-details-subpage></app-patient-details-subpage>
 
+<app-date-picker (dateChanged)="updateDateRange($event)"></app-date-picker>
+
 <mat-tab-group>
   <mat-tab label="BMI">
     <div class="charts">

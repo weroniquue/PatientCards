@@ -57,8 +57,8 @@ export class PatientsListComponent implements OnInit, OnChanges {
           this.response = patient;
           this.patients = patient.entry;
           this.response.total = patient.total ? patient.total : 9000;
-          this.loading = false
-          console.log(this.patients);
+          this.loading = false;
+          this.nextElements();
         }, error => {
           this.loading = false;
           this.errorMsg = error.message;
@@ -79,7 +79,7 @@ export class PatientsListComponent implements OnInit, OnChanges {
         .subscribe(patient => {
           this.patients = this.patients.concat(patient.entry);
           this.response = patient;
-          // this.nextElements();
+          //this.nextElements();
         });
     }
   }

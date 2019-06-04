@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NgxDrpOptions, PresetItem} from 'ngx-mat-daterange-picker';
 import {Range} from '../../utils/DatePickerConfig';
 
@@ -12,6 +12,8 @@ export class DatePickerComponent implements OnInit {
   range: Range = {fromDate: new Date(), toDate: new Date()};
   options: NgxDrpOptions;
   presets: Array<PresetItem> = [];
+
+  @Output() dateChanged = new EventEmitter<Range>();
 
   ngOnInit() {
     const today = new Date();
@@ -41,6 +43,7 @@ export class DatePickerComponent implements OnInit {
   // handler function that receives the updated date range object
   updateRange(range: Range) {
     this.range = range;
+    this.dateChanged.emit(this.range);
   }
 
   // helper function to create initial presets

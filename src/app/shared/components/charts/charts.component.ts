@@ -19,6 +19,12 @@ export class ChartsComponent implements OnInit {
   weightResponse: Observation;
   message: String;
 
+  weight = [];
+  weightLebels = [];
+  bmi = [];
+  bmiLebels = [];
+
+
   public BMIData: ChartDataSets[] = [
     { data: [], label: 'BMI' },
   ];
@@ -99,16 +105,17 @@ export class ChartsComponent implements OnInit {
       .subscribe(response => {
         this.bmiRespone = response;
         if (this.bmiRespone.entry) {
-          const bmi = [];
+          //const bmi = [];
           this.bmiRespone.entry.forEach(item => {
 
             const date = this.datepipe.transform(item.resource.effectiveDateTime, 'yyyy-MM-dd hh:mm');
-            this.lineChartLabelsBMI.push(date);
-            bmi.push(item.resource.valueQuantity.value.toFixed(2));
+            this.bmiLebels.push(date);
+            this.bmi.push(item.resource.valueQuantity.value.toFixed(2));
           });
 
-          this.BMIData[0].data = bmi;
+          this.BMIData[0].data = this.bmi;
           this.BMIData[0].label = 'BMI ' + this.bmiRespone.entry[0].resource.valueQuantity.unit;
+          this.lineChartLabelsBMI = this.bmiLebels;
         } else {
           this.message = 'Data are not available';
         }
@@ -120,16 +127,16 @@ export class ChartsComponent implements OnInit {
       .subscribe(response => {
         this.weightResponse = response;
         if (this.weightResponse.entry) {
-          console.log(this.weightResponse)
-          const weight = [];
+
           this.weightResponse.entry.forEach(item => {
 
             const date = this.datepipe.transform(item.resource.effectiveDateTime, 'yyyy-MM-dd hh:mm');
-            this.lineChartLabelsWeight.push(date);
-            weight.push(item.resource.valueQuantity.value.toFixed(2));
+            this.weightLebels.push(date);
+            this.weight.push(item.resource.valueQuantity.value.toFixed(2));
           });
-          this.weightData[0].data = weight;
+          this.weightData[0].data = this.weight;
           this.weightData[0].label = 'weight ' + this.weightResponse.entry[0].resource.valueQuantity.unit;
+          this.lineChartLabelsWeight = this.weightLebels;
         } else {
           this.message = 'Data are not available';
         }
@@ -147,4 +154,36 @@ export class ChartsComponent implements OnInit {
     console.log(event, active);
   }
 
+  updateDateRange(range: Range) {
+
+    if (this.weightData[0].data.length > 0) {
+
+      const fromDate = new Date(range.fromDate);
+      const toDate = new Date(range.toDate);
+
+      const startIndex = this.lineChartLabelsWeight.findIndex(function (ele) {
+        return new Date(ele) > fromDate;
+      });
+
+      const endIndex = this.lineChartLabelsWeight.findIndex(function (ele) {
+        return new Date(ele) > toDate;
+      });
+
+      if (endIndex !== -1 ){
+        this.lineChartLabelsWeight = this.lineChartLabelsWeight.slice(startIndex, endIndex);
+        this.weightData[0].data = this.weight.slice(startIndex, endIndex);
+
+        this.lineChartLabelsBMI = this.lineChartLabelsBMI.slice(startIndex, endIndex);
+        this.BMIData[0].data = this.bmi.slice(startIndex, endIndex);
+      } else{
+        this.lineChartLabelsWeight = this.lineChartLabelsWeight.slice(startIndex);
+        this.weightData[0].data = this.weight.slice(startIndex);
+
+        this.lineChartLabelsBMI = this.lineChartLabelsBMI.slice(startIndex);
+        this.BMIData[0].data = this.bmi.slice(startIndex);
+      }
+    }
+
+
+  }
 }

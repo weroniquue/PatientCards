@@ -3,3 +3,7 @@
   width: 60%;
   margin: 0 auto;
 }
+
+.date-picker{
+  padding: 0px !important;
+}

@@ -39,4 +39,8 @@ export class ObservationService {
     return this.http.get<Observation>(this.observationUrl + '?patient=' + id + '&code=' + code + '&_sort=date');
   }
 
+  //loadMoreData(url:String): Observable<Observation>{
+    //return this.http.get<Observation>(url + '?patient=' + id + '&code=' + code + '&_sort=date');
+  //}
+
 }
